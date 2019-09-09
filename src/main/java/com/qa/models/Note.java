@@ -11,8 +11,8 @@ public class Note {
     //Id for the table, Generated Value sets the id to be auto generated
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Long id;
+
     private String name;
     private String description;
 
