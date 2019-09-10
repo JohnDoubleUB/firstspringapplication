@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HomeController {
 
+    //We cant test these the same way!
     //When someone hits a specific address this happens
     @RequestMapping("/")
     public String home(){
