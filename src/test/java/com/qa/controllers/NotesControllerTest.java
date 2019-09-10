@@ -20,6 +20,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -73,6 +74,33 @@ public class NotesControllerTest {
 
     @Test
     public void deleteNoteTest(){
+        Note note = new Note();
+        note.setDescription("oof");
+        note.setName("oooff");
+
+        Note note2 = new Note();
+        note2.setDescription("oof");
+        note2.setName("jeff");
+
+        Note note3 = new Note();
+        note3.setDescription("oof");
+        note3.setName("bobby");
+
+        when(repository.findOne(anyLong())).thenReturn(note).thenReturn(note2).thenReturn(note3);
+        assertEquals(notesController.deleteNote(1L).getName(), "oooff");
+        assertEquals(notesController.deleteNote(7L).getName(), "jeff");
+        assertEquals(notesController.deleteNote(20L).getName(), "bobby");
+    }
+
+    @Test
+    public void addNoteTest(){
+        Note note = new Note();
+        note.setDescription("oof");
+        note.setName("John");
+
+
+        when(repository.saveAndFlush(note)).thenReturn(note);
+        assertEquals(notesController.addNote(note).getName(), "John");
 
     }
 
